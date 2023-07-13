@@ -416,7 +416,7 @@ function NumberInput({
         onChange={onChange}
         value={value}
         step={integer ? 1 : 'any'}
-        className='border-2 border-gray-400 rounded-lg min-w-0 flex-grow'
+        className='border-2 border-solid border-gray-400 rounded-lg min-w-0 flex-grow'
         required
       />
     </div>
