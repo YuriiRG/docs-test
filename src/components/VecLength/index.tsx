@@ -65,8 +65,7 @@ export default function App() {
         <Select
           label={
             <>
-              Форма представлення вектора{' '}
-              <Latex className='inline' text='\vec{a}' />
+              Форма представлення вектора <Latex text='\vec{a}' />
               {''}:
             </>
           }
@@ -89,9 +88,9 @@ export default function App() {
               setShowResult(false);
               setVectorStr(newValue);
             }}
-            startLabel={<Latex className='inline' text='\vec{a} = \{' />}
-            separator={<Latex className='inline' text=';\ ' />}
-            endLabel={<Latex className='inline' text='\}' />}
+            startLabel={<Latex text='\vec{a} = \{' />}
+            separator={<Latex text=';\ ' />}
+            endLabel={<Latex text='\}' />}
           />
         )}
         {mode === 'points' && (
@@ -103,9 +102,9 @@ export default function App() {
                 setShowResult(false);
                 setStartPointStr(newValue);
               }}
-              startLabel={<Latex className='inline' text='A = (' />}
-              separator={<Latex className='inline' text=',\ ' />}
-              endLabel={<Latex className='inline' text=')' />}
+              startLabel={<Latex text='A = (' />}
+              separator={<Latex text=',\ ' />}
+              endLabel={<Latex text=')' />}
             />
             <p className='mb-1'>Кінцева точка</p>
             <VectorInput
@@ -114,9 +113,9 @@ export default function App() {
                 setShowResult(false);
                 setEndPointStr(newValue);
               }}
-              startLabel={<Latex className='inline' text='B = (' />}
-              separator={<Latex className='inline' text=',\ ' />}
-              endLabel={<Latex className='inline' text=')' />}
+              startLabel={<Latex text='B = (' />}
+              separator={<Latex text=',\ ' />}
+              endLabel={<Latex text=')' />}
             />
           </>
         )}
@@ -127,7 +126,7 @@ export default function App() {
           Порахувати
         </button>
         <br />
-        {!showResult && <Latex text={`|\\vec{a}| =`} />}
+        {!showResult && <Latex className='block' text={`|\\vec{a}| =`} />}
         {showResult && result !== undefined && (
           <Latex
             text={`|\\vec{a}| ${
@@ -139,17 +138,19 @@ export default function App() {
 
         <h2 className='text-2xl font-bold mt-2'>Теорія</h2>
         <p>
-          Модуль вектора (довжина вектора){' '}
-          <Latex className='inline' text='|\vec{a}|' /> в прямокутних декартових
-          координатах дорівнює квадратному кореню з суми квадратів його
-          координат.
+          Модуль вектора (довжина вектора) <Latex text='|\vec{a}|' /> в
+          прямокутних декартових координатах дорівнює квадратному кореню з суми
+          квадратів його координат.
         </p>
         <p>
-          Наприклад для вектора{' '}
-          <Latex className='inline' text='\vec{a} = \{a_x; a_y; a_z\}' />{' '}
+          Наприклад для вектора <Latex text='\vec{a} = \{a_x; a_y; a_z\}' />{' '}
           довжина вектора обраховується наступним чином:
         </p>
-        <Latex text='|\vec{a}| = \sqrt{a_x^2 + a_y^2 + a_z^2}' blockMode />
+        <Latex
+          className='block'
+          text='|\vec{a}| = \sqrt{a_x^2 + a_y^2 + a_z^2}'
+          blockMode
+        />
       </main>
     </div>
   );

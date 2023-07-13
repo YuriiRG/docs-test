@@ -33,8 +33,7 @@ export default function SeqSum() {
           label={
             <>
               значення першого та останнього членів арифметичної прогресії (
-              <Latex className='inline' text='a_1' />,{' '}
-              <Latex className='inline' text='a_n' />)
+              <Latex text='a_1' />, <Latex text='a_n' />)
             </>
           }
           onChange={(e) => setMode(e.target.value)}
@@ -46,8 +45,7 @@ export default function SeqSum() {
           label={
             <>
               значення першого члена арифметичної прогресії і крок прогресії (
-              <Latex className='inline' text='a_1' />,{' '}
-              <Latex className='inline' text='d' />)
+              <Latex text='a_1' />, <Latex text='d' />)
             </>
           }
           onChange={(e) => setMode(e.target.value)}
@@ -59,8 +57,7 @@ export default function SeqSum() {
           label={
             <>
               значення одного з членів арифметичної прогресії і крок прогресії (
-              <Latex className='inline' text='a_i' />,{' '}
-              <Latex className='inline' text='d' />)
+              <Latex text='a_i' />, <Latex text='d' />)
             </>
           }
           onChange={(e) => setMode(e.target.value)}
@@ -72,8 +69,7 @@ export default function SeqSum() {
           label={
             <>
               значення двох членів арифметичної прогресії (
-              <Latex className='inline' text='a_i' />,{' '}
-              <Latex className='inline' text='a_j' />)
+              <Latex text='a_i' />, <Latex text='a_j' />)
             </>
           }
           onChange={(e) => setMode(e.target.value)}
@@ -85,11 +81,19 @@ export default function SeqSum() {
       {mode === 'oneStep' && <OneStepForm />}
       {mode === 'two' && <TwoForm />}
       <h2 className='text-2xl font-bold my-2'>Теорія</h2>
-      Сума перших <Latex className='inline' text='n' /> членів арифметичної
-      прогресії <Latex className='inline' text='S_n = a_1 + a_2 + ... + a_n' />{' '}
-      може бути знайдена за формулами:
-      <Latex text='S_n = \frac{a_1+a_n}{2} \cdot n' blockMode />
-      <Latex text='S_n = \frac{2a_1+(n-1)d}{2} \cdot n' blockMode />
+      Сума перших <Latex text='n' /> членів арифметичної прогресії{' '}
+      <Latex text='S_n = a_1 + a_2 + ... + a_n' /> може бути знайдена за
+      формулами:
+      <Latex
+        className='block'
+        text='S_n = \frac{a_1+a_n}{2} \cdot n'
+        blockMode
+      />
+      <Latex
+        className='block'
+        text='S_n = \frac{2a_1+(n-1)d}{2} \cdot n'
+        blockMode
+      />
     </main>
   );
 }
@@ -120,11 +124,11 @@ function FirstLastForm() {
           setShowResult(false);
         }}
         value={inputVars.n}
-        label={<Latex text='n = ' />}
+        label={<Latex className='block' text='n = ' />}
         integer
       />
       <NumberInput
-        label={<Latex text='a_1 = ' />}
+        label={<Latex className='block' text='a_1 = ' />}
         id='first'
         onChange={(e) => {
           setInputVars({ ...inputVars, first: e.target.value });
@@ -133,7 +137,7 @@ function FirstLastForm() {
         value={inputVars.first}
       />
       <NumberInput
-        label={<Latex text='a_n = ' />}
+        label={<Latex className='block' text='a_n = ' />}
         id='last'
         onChange={(e) => {
           setInputVars({ ...inputVars, last: e.target.value });
@@ -178,7 +182,7 @@ function FirstStepForm() {
   return (
     <form className='flex flex-col items-start gap-3 mt-3'>
       <NumberInput
-        label={<Latex text='n = ' />}
+        label={<Latex className='block' text='n = ' />}
         id='n'
         onChange={(e) => {
           setInputVars({ ...inputVars, n: e.target.value });
@@ -188,7 +192,7 @@ function FirstStepForm() {
         integer
       />
       <NumberInput
-        label={<Latex text='a_1 = ' />}
+        label={<Latex className='block' text='a_1 = ' />}
         id='first'
         onChange={(e) => {
           setInputVars({ ...inputVars, first: e.target.value });
@@ -197,7 +201,7 @@ function FirstStepForm() {
         value={inputVars.first}
       />
       <NumberInput
-        label={<Latex text='d = ' />}
+        label={<Latex className='block' text='d = ' />}
         id='step'
         onChange={(e) => {
           setInputVars({ ...inputVars, step: e.target.value });
@@ -244,7 +248,7 @@ function OneStepForm() {
   return (
     <form className='flex flex-col items-start gap-3 mt-3'>
       <NumberInput
-        label={<Latex text='n = ' />}
+        label={<Latex className='block' text='n = ' />}
         id='n'
         onChange={(e) => {
           setInputVars({ ...inputVars, n: e.target.value });
@@ -257,7 +261,7 @@ function OneStepForm() {
         значення коефіцієнтів і відповідні їм значення членів прогресії:
       </div>
       <NumberInput
-        label={<Latex text='i = ' />}
+        label={<Latex className='block' text='i = ' />}
         id='index'
         onChange={(e) => {
           setInputVars({ ...inputVars, index: e.target.value });
@@ -268,7 +272,7 @@ function OneStepForm() {
       />
       <NumberInput
         id='value'
-        label={<Latex text='a_i = ' />}
+        label={<Latex className='block' text='a_i = ' />}
         onChange={(e) => {
           setInputVars({ ...inputVars, value: e.target.value });
           setShowResult(false);
@@ -278,7 +282,7 @@ function OneStepForm() {
       <div>крок прогресії:</div>
       <NumberInput
         id='step'
-        label={<Latex text='d = ' />}
+        label={<Latex className='block' text='d = ' />}
         onChange={(e) => {
           setInputVars({ ...inputVars, step: e.target.value });
           setShowResult(false);
@@ -327,7 +331,7 @@ function TwoForm() {
   return (
     <form className='flex flex-col items-start gap-3 mt-3'>
       <NumberInput
-        label={<Latex text='n = ' />}
+        label={<Latex className='block' text='n = ' />}
         id='n'
         onChange={(e) => {
           setInputVars({ ...inputVars, n: e.target.value });
@@ -340,7 +344,7 @@ function TwoForm() {
         значення коефіцієнтів і відповідні їм значення членів прогресії:
       </div>
       <NumberInput
-        label={<Latex text='i = ' />}
+        label={<Latex className='block' text='i = ' />}
         id='index'
         onChange={(e) => {
           setInputVars({ ...inputVars, index: e.target.value });
@@ -350,7 +354,7 @@ function TwoForm() {
         integer
       />
       <NumberInput
-        label={<Latex text='a_i = ' />}
+        label={<Latex className='block' text='a_i = ' />}
         id='value'
         onChange={(e) => {
           setInputVars({ ...inputVars, value: e.target.value });
@@ -359,7 +363,7 @@ function TwoForm() {
         value={inputVars.value}
       />
       <NumberInput
-        label={<Latex text='j = ' />}
+        label={<Latex className='block' text='j = ' />}
         id='index2'
         onChange={(e) => {
           setInputVars({ ...inputVars, index2: e.target.value });
@@ -369,7 +373,7 @@ function TwoForm() {
         integer
       />
       <NumberInput
-        label={<Latex text='a_j = ' />}
+        label={<Latex className='block' text='a_j = ' />}
         id='value2'
         onChange={(e) => {
           setInputVars({ ...inputVars, value2: e.target.value });

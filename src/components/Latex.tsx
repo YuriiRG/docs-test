@@ -22,10 +22,10 @@ export default function Latex({
     }
   }, [text, blockMode]);
   if (html.error) {
-    return <div className={className}>Invalid LaTeX</div>;
+    return <span className={className}>Invalid LaTeX</span>;
   }
   return (
-    <div
+    <span
       className={className}
       dangerouslySetInnerHTML={{ __html: html.data }}
     />
