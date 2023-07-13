@@ -1,0 +1,14 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.Модуль 1": {
+    "message": "Модуль 1",
+    "description": "The label for category Модуль 1 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Модуль 1.link.generated-index.description": {
+    "message": "Конспект з Python модуль 1",
+    "description": "The generated-index page description for category Модуль 1 in sidebar tutorialSidebar"
+  }
+}
