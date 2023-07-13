@@ -39,119 +39,117 @@ export default function App() {
   }
 
   return (
-    <div className="flex justify-center p-2">
-      <main className="w-[65ch]">
-        <h1 className="mb-3 text-3xl font-bold">
-          Калькулятор для обрахунку довжини вектора (модуля вектора)
-        </h1>
-        <Select
-          label="Розмірність вектора:"
-          id="dimensions"
-          value={vectorStr.length}
-          onChange={(e) => {
-            setVectorStr(Array(Number(e.target.value)).fill("0"));
-            setStartPointStr(Array(Number(e.target.value)).fill("0"));
-            setEndPointStr(Array(Number(e.target.value)).fill("0"));
+    <div>
+      <h1 className="mb-3 text-3xl font-bold">
+        Калькулятор для обрахунку довжини вектора (модуля вектора)
+      </h1>
+      <Select
+        label="Розмірність вектора:"
+        id="dimensions"
+        value={vectorStr.length}
+        onChange={(e) => {
+          setVectorStr(Array(Number(e.target.value)).fill("0"));
+          setStartPointStr(Array(Number(e.target.value)).fill("0"));
+          setEndPointStr(Array(Number(e.target.value)).fill("0"));
+          setShowResult(false);
+        }}
+        options={[
+          { value: "2", text: "2" },
+          { value: "3", text: "3" },
+          { value: "4", text: "4" },
+          { value: "5", text: "5" },
+          { value: "6", text: "6" },
+        ]}
+      />
+      <Select
+        label={
+          <>
+            Форма представлення вектора <Latex text="\vec{a}" />
+            {""}:
+          </>
+        }
+        id="mode"
+        value={mode}
+        onChange={(e) => {
+          setShowResult(false);
+          setMode(e.target.value);
+        }}
+        options={[
+          { value: "coords", text: "Координатами" },
+          { value: "points", text: "Точками" },
+        ]}
+      />
+      <p className="mb-1">Введіть значення вектора:</p>
+      {mode === "coords" && (
+        <VectorInput
+          value={vectorStr}
+          setValue={(newValue) => {
             setShowResult(false);
+            setVectorStr(newValue);
           }}
-          options={[
-            { value: "2", text: "2" },
-            { value: "3", text: "3" },
-            { value: "4", text: "4" },
-            { value: "5", text: "5" },
-            { value: "6", text: "6" },
-          ]}
+          startLabel={<Latex text="\vec{a} = \{" />}
+          separator={<Latex text=";\ " />}
+          endLabel={<Latex text="\}" />}
         />
-        <Select
-          label={
-            <>
-              Форма представлення вектора <Latex text="\vec{a}" />
-              {""}:
-            </>
-          }
-          id="mode"
-          value={mode}
-          onChange={(e) => {
-            setShowResult(false);
-            setMode(e.target.value);
-          }}
-          options={[
-            { value: "coords", text: "Координатами" },
-            { value: "points", text: "Точками" },
-          ]}
-        />
-        <p className="mb-1">Введіть значення вектора:</p>
-        {mode === "coords" && (
+      )}
+      {mode === "points" && (
+        <>
+          <p className="mb-1">Початкова точка</p>
           <VectorInput
-            value={vectorStr}
+            value={startPointStr}
             setValue={(newValue) => {
               setShowResult(false);
-              setVectorStr(newValue);
+              setStartPointStr(newValue);
             }}
-            startLabel={<Latex text="\vec{a} = \{" />}
-            separator={<Latex text=";\ " />}
-            endLabel={<Latex text="\}" />}
+            startLabel={<Latex text="A = (" />}
+            separator={<Latex text=",\ " />}
+            endLabel={<Latex text=")" />}
           />
-        )}
-        {mode === "points" && (
-          <>
-            <p className="mb-1">Початкова точка</p>
-            <VectorInput
-              value={startPointStr}
-              setValue={(newValue) => {
-                setShowResult(false);
-                setStartPointStr(newValue);
-              }}
-              startLabel={<Latex text="A = (" />}
-              separator={<Latex text=",\ " />}
-              endLabel={<Latex text=")" />}
-            />
-            <p className="mb-1">Кінцева точка</p>
-            <VectorInput
-              value={endPointStr}
-              setValue={(newValue) => {
-                setShowResult(false);
-                setEndPointStr(newValue);
-              }}
-              startLabel={<Latex text="B = (" />}
-              separator={<Latex text=",\ " />}
-              endLabel={<Latex text=")" />}
-            />
-          </>
-        )}
-        <button
-          className="mb-2 rounded bg-gray-200 p-2 transition-colors hover:bg-gray-300"
-          onClick={() => setShowResult(true)}
-        >
-          Порахувати
-        </button>
-        <br />
-        {!showResult && <Latex className="block" text={`|\\vec{a}| =`} />}
-        {showResult && result !== undefined && (
-          <Latex
-            text={`|\\vec{a}| ${
-              Number.isInteger(result) ? "=" : "\\approx"
-            } ${result}`}
+          <p className="mb-1">Кінцева точка</p>
+          <VectorInput
+            value={endPointStr}
+            setValue={(newValue) => {
+              setShowResult(false);
+              setEndPointStr(newValue);
+            }}
+            startLabel={<Latex text="B = (" />}
+            separator={<Latex text=",\ " />}
+            endLabel={<Latex text=")" />}
           />
-        )}
-        {showResult && result === undefined && <>Невірні вхідні дані</>}
-
-        <h2 className="mt-2 text-2xl font-bold">Теорія</h2>
-        <p>
-          Модуль вектора (довжина вектора) <Latex text="|\vec{a}|" /> в
-          прямокутних декартових координатах дорівнює квадратному кореню з суми
-          квадратів його координат.
-        </p>
-        <p>
-          Наприклад для вектора <Latex text="\vec{a} = \{a_x; a_y; a_z\}" />{" "}
-          довжина вектора обраховується наступним чином:
-        </p>
+        </>
+      )}
+      <button
+        className="mb-2 rounded bg-gray-200 p-2 transition-colors hover:bg-gray-300"
+        onClick={() => setShowResult(true)}
+      >
+        Порахувати
+      </button>
+      <br />
+      {!showResult && <Latex className="block" text={`|\\vec{a}| =`} />}
+      {showResult && result !== undefined && (
         <Latex
-          className="block"
-          text="|\vec{a}| = \sqrt{a_x^2 + a_y^2 + a_z^2}"
-          blockMode
+          text={`|\\vec{a}| ${
+            Number.isInteger(result) ? "=" : "\\approx"
+          } ${result}`}
         />
-      </main>
+      )}
+      {showResult && result === undefined && <>Невірні вхідні дані</>}
+
+      <h2 className="mt-2 text-2xl font-bold">Теорія</h2>
+      <p>
+        Модуль вектора (довжина вектора) <Latex text="|\vec{a}|" /> в
+        прямокутних декартових координатах дорівнює квадратному кореню з суми
+        квадратів його координат.
+      </p>
+      <p>
+        Наприклад для вектора <Latex text="\vec{a} = \{a_x; a_y; a_z\}" />{" "}
+        довжина вектора обраховується наступним чином:
+      </p>
+      <Latex
+        className="block"
+        text="|\vec{a}| = \sqrt{a_x^2 + a_y^2 + a_z^2}"
+        blockMode
+      />
     </div>
   );
 }
