@@ -1,11 +1,11 @@
-import React from 'react';
-import 'katex/dist/katex.min.css';
-import { useMemo } from 'react';
-import katex from 'katex';
+import React from "react";
+import "katex/dist/katex.min.css";
+import { useMemo } from "react";
+import katex from "katex";
 export default function Latex({
   text,
   className,
-  blockMode = false
+  blockMode = false,
 }: {
   text: string;
   className?: string;
