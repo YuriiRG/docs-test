@@ -20,7 +20,7 @@ const floatTransform = (str: string) => {
 export default function SeqSum() {
   const [mode, setMode] = useState("firstLast");
   return (
-    <div className="p-2">
+    <div>
       <h1 className="mb-2 text-3xl font-bold">
         Знайти суму арифметичної прогресії
       </h1>

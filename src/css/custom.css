@@ -39,7 +39,7 @@ button,
 select,
 fieldset {
   border-style: solid;
-  border: none;
+  border-width: 0;
   box-shadow: none;
 }
 fieldset {
