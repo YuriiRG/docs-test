@@ -49,7 +49,13 @@ export default function ComplexMath() {
           if (showResult) {
             const result = calculateResult({ z1, z2, op });
             if (result !== undefined) {
-              return <Latex text={`\\ z_2 = ${result.re} + ${result.im}i`} />;
+              return (
+                <Latex
+                  text={`\\ z_2 = ${result.re} ${
+                    result.im !== 0 ? `+ ${result.im}i` : ""
+                  }`}
+                />
+              );
             } else {
               return (
                 <>
