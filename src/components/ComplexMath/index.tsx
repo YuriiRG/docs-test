@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Latex from "../Latex";
-import { calculateResult } from "./math";
+import { calculateComplexMath } from "./math";
 
 export default function ComplexMath() {
   const [showResult, setShowResult] = useState(false);
@@ -47,7 +47,7 @@ export default function ComplexMath() {
         </select>
         {(() => {
           if (showResult) {
-            const result = calculateResult({ z1, z2, op });
+            const result = calculateComplexMath({ z1, z2, op });
             if (result !== undefined) {
               return (
                 <Latex

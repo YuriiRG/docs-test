@@ -18,7 +18,7 @@ const complexMathSchema = z.object({
   op: z.enum(["+", "-", "*", "/"]),
 });
 
-export function calculateResult(input: {
+export function calculateComplexMath(input: {
   z1: { re: string; im: string };
   z2: { re: string; im: string };
   op: string;
