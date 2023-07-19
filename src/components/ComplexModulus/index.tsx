@@ -18,6 +18,7 @@ export default function ComplexModulus() {
         <input
           type="number"
           value={re}
+          className="w-16 rounded border-2 border-gray-300"
           onChange={(e) => {
             setShowResult(false);
             setRe(e.target.value);
@@ -27,6 +28,7 @@ export default function ComplexModulus() {
         <input
           type="number"
           value={im}
+          className="w-16 rounded border-2 border-gray-300"
           onChange={(e) => {
             setShowResult(false);
             setIm(e.target.value);
@@ -41,7 +43,9 @@ export default function ComplexModulus() {
           <Latex text={`|z| = ${showResult ? result : ""}`} />
         )}
       </div>
-      <button onClick={() => setShowResult(true)}>Порахувати</button>
+      <button className="mt-2 rounded p-2" onClick={() => setShowResult(true)}>
+        Порахувати
+      </button>
     </div>
   );
 }

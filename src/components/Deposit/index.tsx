@@ -23,6 +23,7 @@ export default function Deposit() {
           Початковий внесок:
         </label>
         <input
+          className="rounded border-2 border-gray-300"
           id="initial"
           type="number"
           value={inputData.initial}
@@ -37,6 +38,7 @@ export default function Deposit() {
           Щомісячний внесок:
         </label>
         <input
+          className="rounded border-2 border-gray-300"
           id="monthly"
           type="number"
           value={inputData.monthly}
@@ -51,6 +53,7 @@ export default function Deposit() {
           Відсоткова ставка:
         </label>
         <input
+          className="rounded border-2 border-gray-300"
           id="interest"
           type="number"
           value={inputData.interest}
@@ -59,9 +62,10 @@ export default function Deposit() {
             setInputData({ ...inputData, interest: e.target.value });
           }}
         />
-        %
+        <span className="mr-2">%</span>
         <select
           id="interestType"
+          className="rounded"
           value={inputData.interestType}
           onChange={(e) => {
             setShowResult(false);
@@ -77,6 +81,7 @@ export default function Deposit() {
           Термін депозиту:
         </label>
         <input
+          className="mr-2 rounded border-2 border-gray-300"
           id="length"
           min={0}
           type="number"
@@ -87,6 +92,7 @@ export default function Deposit() {
           }}
         />
         <select
+          className="rounded"
           id="lengthType"
           value={inputData.lengthType}
           onChange={(e) => {
@@ -98,7 +104,9 @@ export default function Deposit() {
           <option value="month">місяців</option>
         </select>
       </fieldset>
-      <button onClick={() => setShowResult(true)}>Порахувати</button>
+      <button className="mt-2 rounded p-2" onClick={() => setShowResult(true)}>
+        Порахувати
+      </button>
       {showResult &&
         (result !== undefined ? (
           <div>Кінцева сума виплат: {result.sum}</div>

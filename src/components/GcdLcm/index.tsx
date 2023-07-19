@@ -12,7 +12,7 @@ export default function GcdLcm() {
       <div>
         <input
           type="number"
-          className=""
+          className="rounded border-2 border-gray-300"
           value={num1}
           onChange={(e) => {
             setShowResult(false);
@@ -23,13 +23,16 @@ export default function GcdLcm() {
         <input
           type="number"
           value={num2}
+          className="rounded border-2 border-gray-300"
           onChange={(e) => {
             setShowResult(false);
             setNum2(e.target.value);
           }}
         />
       </div>
-      <button onClick={() => setShowResult(true)}>Порахувати</button>
+      <button onClick={() => setShowResult(true)} className="mt-2 rounded p-2">
+        Порахувати
+      </button>
       {showResult &&
         (result ? (
           <>
