@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { calculateDeposit } from "./math";
+import { NumberInput, Select } from "../shared";
 
 export default function Deposit() {
   const [inputData, setInputData] = useState({
@@ -22,14 +23,12 @@ export default function Deposit() {
         <label htmlFor="initial" className="mr-2">
           Початковий внесок:
         </label>
-        <input
-          className="rounded border-2 border-gray-300"
+        <NumberInput
           id="initial"
-          type="number"
           value={inputData.initial}
-          onChange={(e) => {
+          onChange={(newValue) => {
             setShowResult(false);
-            setInputData({ ...inputData, initial: e.target.value });
+            setInputData({ ...inputData, initial: newValue });
           }}
         />
       </fieldset>
@@ -37,14 +36,12 @@ export default function Deposit() {
         <label htmlFor="monthly" className="mr-2">
           Щомісячний внесок:
         </label>
-        <input
-          className="rounded border-2 border-gray-300"
+        <NumberInput
           id="monthly"
-          type="number"
           value={inputData.monthly}
-          onChange={(e) => {
+          onChange={(newValue) => {
             setShowResult(false);
-            setInputData({ ...inputData, monthly: e.target.value });
+            setInputData({ ...inputData, monthly: newValue });
           }}
         />
       </fieldset>
@@ -52,57 +49,54 @@ export default function Deposit() {
         <label htmlFor="interest" className="mr-2">
           Відсоткова ставка:
         </label>
-        <input
-          className="rounded border-2 border-gray-300"
+        <NumberInput
           id="interest"
-          type="number"
           value={inputData.interest}
-          onChange={(e) => {
+          onChange={(newValue) => {
             setShowResult(false);
-            setInputData({ ...inputData, interest: e.target.value });
+            setInputData({ ...inputData, interest: newValue });
           }}
         />
         <span className="mr-2">%</span>
-        <select
+        <Select
           id="interestType"
-          className="rounded"
           value={inputData.interestType}
-          onChange={(e) => {
+          onChange={(newValue) => {
             setShowResult(false);
-            setInputData({ ...inputData, interestType: e.target.value });
+            setInputData({ ...inputData, interestType: newValue });
           }}
-        >
-          <option value="year">за рік</option>
-          <option value="month">за місяць</option>
-        </select>
+          options={[
+            { value: "year", text: "за рік" },
+            { value: "month", text: "за місяць" },
+          ]}
+        />
       </fieldset>
       <fieldset>
         <label htmlFor="length" className="mr-2">
           Термін депозиту:
         </label>
-        <input
-          className="mr-2 rounded border-2 border-gray-300"
+        <NumberInput
+          className="mr-2"
           id="length"
-          min={0}
-          type="number"
+          positive
           value={inputData.length}
-          onChange={(e) => {
+          onChange={(newValue) => {
             setShowResult(false);
-            setInputData({ ...inputData, length: e.target.value });
+            setInputData({ ...inputData, length: newValue });
           }}
         />
-        <select
-          className="rounded"
+        <Select
           id="lengthType"
           value={inputData.lengthType}
-          onChange={(e) => {
+          onChange={(newValue) => {
             setShowResult(false);
-            setInputData({ ...inputData, lengthType: e.target.value });
+            setInputData({ ...inputData, lengthType: newValue });
           }}
-        >
-          <option value="year">років</option>
-          <option value="month">місяців</option>
-        </select>
+          options={[
+            { value: "year", text: "років" },
+            { value: "month", text: "місяців" },
+          ]}
+        />
       </fieldset>
       <button className="mt-2 rounded p-2" onClick={() => setShowResult(true)}>
         Порахувати

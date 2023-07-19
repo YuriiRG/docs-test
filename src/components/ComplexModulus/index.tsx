@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { calculateComplexModulus } from "./math";
 import Latex from "../Latex";
+import { ComplexInput, SubmitButton } from "../shared";
 
 export default function ComplexModulus() {
-  const [re, setRe] = useState("0");
-  const [im, setIm] = useState("0");
+  const [num, setNum] = useState({
+    re: "0",
+    im: "0",
+  });
   const [showResult, setShowResult] = useState(false);
-  const result = calculateComplexModulus(re, im);
+  const result = calculateComplexModulus(num.re, num.im);
 
   return (
     <div>
@@ -14,27 +17,14 @@ export default function ComplexModulus() {
         Онлайн калькулятор. Модуль комплексного числа
       </h2>
       <div>
-        <Latex text="z=\ " />
-        <input
-          type="number"
-          value={re}
-          className="w-16 rounded border-2 border-gray-300"
-          onChange={(e) => {
+        <ComplexInput
+          id="z"
+          onChange={(newValue) => {
+            setNum(newValue);
             setShowResult(false);
-            setRe(e.target.value);
           }}
+          value={num}
         />
-        <Latex text="\ +\ " />
-        <input
-          type="number"
-          value={im}
-          className="w-16 rounded border-2 border-gray-300"
-          onChange={(e) => {
-            setShowResult(false);
-            setIm(e.target.value);
-          }}
-        />
-        <Latex text="i" />
       </div>
       <div>
         {showResult && result === undefined ? (
@@ -43,9 +33,9 @@ export default function ComplexModulus() {
           <Latex text={`|z| = ${showResult ? result : ""}`} />
         )}
       </div>
-      <button className="mt-2 rounded p-2" onClick={() => setShowResult(true)}>
+      <SubmitButton className="mt-2" onClick={() => setShowResult(true)}>
         Порахувати
-      </button>
+      </SubmitButton>
     </div>
   );
 }

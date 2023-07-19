@@ -3,15 +3,7 @@ import { useState } from "react";
 import { z } from "zod";
 import { pointDistance, vectorLength } from "./math";
 import Latex from "../Latex";
-
-const floatRegex = /^-?[0-9]+([.,][0-9]+)?$/;
-const floatTransform = (str: string): number => {
-  return Number(str.replace(",", "."));
-};
-
-const floatArraySchema = z.array(
-  z.string().regex(floatRegex).transform(floatTransform),
-);
+import { Select, SubmitButton, VectorInput, floatSchema } from "../shared";
 
 export default function App() {
   const [vectorStr, setVectorStr] = useState<string[]>(["0", "0"]);
@@ -20,15 +12,15 @@ export default function App() {
   const [mode, setMode] = useState<string>("coords");
   const [showResult, setShowResult] = useState(false);
 
-  const vectorParseResult = floatArraySchema.safeParse(vectorStr);
+  const vectorParseResult = z.array(floatSchema).safeParse(vectorStr);
   const vector = vectorParseResult.success ? vectorParseResult.data : undefined;
 
-  const startParseResult = floatArraySchema.safeParse(startPointStr);
+  const startParseResult = z.array(floatSchema).safeParse(startPointStr);
   const startPoint = startParseResult.success
     ? startParseResult.data
     : undefined;
 
-  const endParseResult = floatArraySchema.safeParse(endPointStr);
+  const endParseResult = z.array(floatSchema).safeParse(endPointStr);
   const endPoint = endParseResult.success ? endParseResult.data : undefined;
 
   let result: number | undefined = undefined;
@@ -43,14 +35,14 @@ export default function App() {
       <h1 className="mb-3 text-3xl font-bold">
         Калькулятор для обрахунку довжини вектора (модуля вектора)
       </h1>
-      <Select
+      <LabeledSelect
         label="Розмірність вектора:"
         id="dimensions"
-        value={vectorStr.length}
-        onChange={(e) => {
-          setVectorStr(Array(Number(e.target.value)).fill("0"));
-          setStartPointStr(Array(Number(e.target.value)).fill("0"));
-          setEndPointStr(Array(Number(e.target.value)).fill("0"));
+        value={vectorStr.length.toString()}
+        onChange={(newValue) => {
+          setVectorStr(Array(Number(newValue)).fill("0"));
+          setStartPointStr(Array(Number(newValue)).fill("0"));
+          setEndPointStr(Array(Number(newValue)).fill("0"));
           setShowResult(false);
         }}
         options={[
@@ -61,7 +53,7 @@ export default function App() {
           { value: "6", text: "6" },
         ]}
       />
-      <Select
+      <LabeledSelect
         label={
           <>
             Форма представлення вектора <Latex text="\vec{a}" />
@@ -70,9 +62,9 @@ export default function App() {
         }
         id="mode"
         value={mode}
-        onChange={(e) => {
+        onChange={(newValue) => {
           setShowResult(false);
-          setMode(e.target.value);
+          setMode(newValue);
         }}
         options={[
           { value: "coords", text: "Координатами" },
@@ -82,8 +74,9 @@ export default function App() {
       <p className="mb-1">Введіть значення вектора:</p>
       {mode === "coords" && (
         <VectorInput
+          className="mb-2"
           value={vectorStr}
-          setValue={(newValue) => {
+          onChange={(newValue) => {
             setShowResult(false);
             setVectorStr(newValue);
           }}
@@ -97,7 +90,7 @@ export default function App() {
           <p className="mb-1">Початкова точка</p>
           <VectorInput
             value={startPointStr}
-            setValue={(newValue) => {
+            onChange={(newValue) => {
               setShowResult(false);
               setStartPointStr(newValue);
             }}
@@ -108,7 +101,7 @@ export default function App() {
           <p className="mb-1">Кінцева точка</p>
           <VectorInput
             value={endPointStr}
-            setValue={(newValue) => {
+            onChange={(newValue) => {
               setShowResult(false);
               setEndPointStr(newValue);
             }}
@@ -118,12 +111,9 @@ export default function App() {
           />
         </>
       )}
-      <button
-        className="mb-2 rounded bg-gray-200 p-2 transition-colors hover:bg-gray-300"
-        onClick={() => setShowResult(true)}
-      >
+      <SubmitButton className="mb-2" onClick={() => setShowResult(true)}>
         Порахувати
-      </button>
+      </SubmitButton>
       <br />
       {!showResult && <Latex className="block" text={`|\\vec{a}| =`} />}
       {showResult && result !== undefined && (
@@ -154,7 +144,7 @@ export default function App() {
   );
 }
 
-function Select({
+function LabeledSelect({
   id,
   label,
   options,
@@ -163,61 +153,22 @@ function Select({
 }: {
   id: string;
   label: ReactNode;
-  options: { value: string | number; text: ReactNode }[];
-  value?: string | number;
-  onChange?: React.ChangeEventHandler<HTMLSelectElement>;
+  options: { value: string; text: ReactNode }[];
+  value?: string;
+  onChange: (newValue: string) => void;
 }) {
   return (
     <fieldset className="mb-2">
       <label htmlFor={id} className="mr-2">
         {label}
       </label>
-      <select
+      <Select
         id={id}
         value={value}
         onChange={onChange}
-        className="rounded bg-gray-200 p-1 align-baseline"
-      >
-        {options.map(({ value, text }) => (
-          <option key={value} value={value} className="">
-            {text}
-          </option>
-        ))}
-      </select>
-    </fieldset>
-  );
-}
-
-function VectorInput({
-  value,
-  setValue,
-  startLabel,
-  endLabel,
-  separator,
-}: {
-  value: string[];
-  setValue: (newValue: string[]) => void;
-  startLabel?: ReactNode;
-  endLabel?: ReactNode;
-  separator?: ReactNode;
-}) {
-  return (
-    <fieldset className="mb-2">
-      {startLabel}
-      {value.map((num, i) => (
-        <Fragment key={i}>
-          <input
-            type="string"
-            className="w-10 rounded border-2 border-solid border-gray-200"
-            value={num}
-            onChange={(e) => {
-              setValue(value.map((old, j) => (j === i ? e.target.value : old)));
-            }}
-          />
-          {i !== value.length - 1 ? separator : null}
-        </Fragment>
-      ))}
-      {endLabel}
+        className="align-baseline"
+        options={options}
+      />
     </fieldset>
   );
 }

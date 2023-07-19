@@ -8,14 +8,12 @@ import {
 import { z } from "zod";
 import Latex from "../Latex";
 import { sumFirstLast, sumFirstStep, sumOneStep, sumTwo } from "./math";
-
-const integerRegex = /^-?[0-9]+$/;
-const integerTransform = Number;
-
-const floatRegex = /^-?[0-9]+([.,][0-9]+)?$/;
-const floatTransform = (str: string) => {
-  return Number(str.replace(",", "."));
-};
+import {
+  NumberInput,
+  SubmitButton,
+  floatSchema,
+  integerSchema,
+} from "../shared";
 
 export default function SeqSum() {
   const [mode, setMode] = useState("firstLast");
@@ -99,9 +97,9 @@ export default function SeqSum() {
 }
 
 const firstLastSchema = z.object({
-  n: z.string().regex(integerRegex).transform(integerTransform),
-  first: z.string().regex(floatRegex).transform(floatTransform),
-  last: z.string().regex(floatRegex).transform(floatTransform),
+  n: integerSchema,
+  first: floatSchema,
+  last: floatSchema,
 });
 
 function FirstLastForm() {
@@ -117,30 +115,30 @@ function FirstLastForm() {
 
   return (
     <form className="mt-3 flex flex-col items-start gap-3">
-      <NumberInput
+      <LabeledNumberInput
         id="n"
-        onChange={(e) => {
-          setInputVars({ ...inputVars, n: e.target.value });
+        onChange={(newValue) => {
+          setInputVars({ ...inputVars, n: newValue });
           setShowResult(false);
         }}
         value={inputVars.n}
         label={<Latex className="block" text="n = " />}
         integer
       />
-      <NumberInput
+      <LabeledNumberInput
         label={<Latex className="block" text="a_1 = " />}
         id="first"
-        onChange={(e) => {
-          setInputVars({ ...inputVars, first: e.target.value });
+        onChange={(newValue) => {
+          setInputVars({ ...inputVars, first: newValue });
           setShowResult(false);
         }}
         value={inputVars.first}
       />
-      <NumberInput
+      <LabeledNumberInput
         label={<Latex className="block" text="a_n = " />}
         id="last"
-        onChange={(e) => {
-          setInputVars({ ...inputVars, last: e.target.value });
+        onChange={(newValue) => {
+          setInputVars({ ...inputVars, last: newValue });
           setShowResult(false);
         }}
         value={inputVars.last}
@@ -163,9 +161,9 @@ function FirstLastForm() {
 }
 
 const firstStepSchema = z.object({
-  n: z.string().regex(integerRegex).transform(integerTransform),
-  first: z.string().regex(floatRegex).transform(floatTransform),
-  step: z.string().regex(floatRegex).transform(floatTransform),
+  n: integerSchema,
+  first: floatSchema,
+  step: floatSchema,
 });
 
 function FirstStepForm() {
@@ -181,30 +179,30 @@ function FirstStepForm() {
 
   return (
     <form className="mt-3 flex flex-col items-start gap-3">
-      <NumberInput
+      <LabeledNumberInput
         label={<Latex className="block" text="n = " />}
         id="n"
-        onChange={(e) => {
-          setInputVars({ ...inputVars, n: e.target.value });
+        onChange={(newValue) => {
+          setInputVars({ ...inputVars, n: newValue });
           setShowResult(false);
         }}
         value={inputVars.n}
         integer
       />
-      <NumberInput
+      <LabeledNumberInput
         label={<Latex className="block" text="a_1 = " />}
         id="first"
-        onChange={(e) => {
-          setInputVars({ ...inputVars, first: e.target.value });
+        onChange={(newValue) => {
+          setInputVars({ ...inputVars, first: newValue });
           setShowResult(false);
         }}
         value={inputVars.first}
       />
-      <NumberInput
+      <LabeledNumberInput
         label={<Latex className="block" text="d = " />}
         id="step"
-        onChange={(e) => {
-          setInputVars({ ...inputVars, step: e.target.value });
+        onChange={(newValue) => {
+          setInputVars({ ...inputVars, step: newValue });
           setShowResult(false);
         }}
         value={inputVars.step}
@@ -227,10 +225,10 @@ function FirstStepForm() {
 }
 
 const oneStepSchema = z.object({
-  n: z.string().regex(integerRegex).transform(integerTransform),
-  index: z.string().regex(integerRegex).transform(integerTransform),
-  value: z.string().regex(floatRegex).transform(floatTransform),
-  step: z.string().regex(floatRegex).transform(floatTransform),
+  n: integerSchema,
+  index: integerSchema,
+  value: floatSchema,
+  step: floatSchema,
 });
 
 function OneStepForm() {
@@ -247,11 +245,11 @@ function OneStepForm() {
 
   return (
     <form className="mt-3 flex flex-col items-start gap-3">
-      <NumberInput
+      <LabeledNumberInput
         label={<Latex className="block" text="n = " />}
         id="n"
-        onChange={(e) => {
-          setInputVars({ ...inputVars, n: e.target.value });
+        onChange={(newValue) => {
+          setInputVars({ ...inputVars, n: newValue });
           setShowResult(false);
         }}
         value={inputVars.n}
@@ -260,31 +258,31 @@ function OneStepForm() {
       <div>
         значення коефіцієнтів і відповідні їм значення членів прогресії:
       </div>
-      <NumberInput
+      <LabeledNumberInput
         label={<Latex className="block" text="i = " />}
         id="index"
-        onChange={(e) => {
-          setInputVars({ ...inputVars, index: e.target.value });
+        onChange={(newValue) => {
+          setInputVars({ ...inputVars, index: newValue });
           setShowResult(false);
         }}
         value={inputVars.index}
         integer
       />
-      <NumberInput
+      <LabeledNumberInput
         id="value"
         label={<Latex className="block" text="a_i = " />}
-        onChange={(e) => {
-          setInputVars({ ...inputVars, value: e.target.value });
+        onChange={(newValue) => {
+          setInputVars({ ...inputVars, value: newValue });
           setShowResult(false);
         }}
         value={inputVars.value}
       />
       <div>крок прогресії:</div>
-      <NumberInput
+      <LabeledNumberInput
         id="step"
         label={<Latex className="block" text="d = " />}
-        onChange={(e) => {
-          setInputVars({ ...inputVars, step: e.target.value });
+        onChange={(newValue) => {
+          setInputVars({ ...inputVars, step: newValue });
           setShowResult(false);
         }}
         value={inputVars.step}
@@ -307,11 +305,11 @@ function OneStepForm() {
 }
 
 const twoSchema = z.object({
-  n: z.string().regex(integerRegex).transform(integerTransform),
-  index: z.string().regex(integerRegex).transform(integerTransform),
-  value: z.string().regex(floatRegex).transform(floatTransform),
-  index2: z.string().regex(integerRegex).transform(integerTransform),
-  value2: z.string().regex(floatRegex).transform(floatTransform),
+  n: integerSchema,
+  index: integerSchema,
+  value: floatSchema,
+  index2: integerSchema,
+  value2: floatSchema,
 });
 
 function TwoForm() {
@@ -330,11 +328,11 @@ function TwoForm() {
 
   return (
     <form className="mt-3 flex flex-col items-start gap-3">
-      <NumberInput
+      <LabeledNumberInput
         label={<Latex className="block" text="n = " />}
         id="n"
-        onChange={(e) => {
-          setInputVars({ ...inputVars, n: e.target.value });
+        onChange={(newValue) => {
+          setInputVars({ ...inputVars, n: newValue });
           setShowResult(false);
         }}
         value={inputVars.n}
@@ -343,40 +341,40 @@ function TwoForm() {
       <div>
         значення коефіцієнтів і відповідні їм значення членів прогресії:
       </div>
-      <NumberInput
+      <LabeledNumberInput
         label={<Latex className="block" text="i = " />}
         id="index"
-        onChange={(e) => {
-          setInputVars({ ...inputVars, index: e.target.value });
+        onChange={(newValue) => {
+          setInputVars({ ...inputVars, index: newValue });
           setShowResult(false);
         }}
         value={inputVars.index}
         integer
       />
-      <NumberInput
+      <LabeledNumberInput
         label={<Latex className="block" text="a_i = " />}
         id="value"
-        onChange={(e) => {
-          setInputVars({ ...inputVars, value: e.target.value });
+        onChange={(newValue) => {
+          setInputVars({ ...inputVars, value: newValue });
           setShowResult(false);
         }}
         value={inputVars.value}
       />
-      <NumberInput
+      <LabeledNumberInput
         label={<Latex className="block" text="j = " />}
         id="index2"
-        onChange={(e) => {
-          setInputVars({ ...inputVars, index2: e.target.value });
+        onChange={(newValue) => {
+          setInputVars({ ...inputVars, index2: newValue });
           setShowResult(false);
         }}
         value={inputVars.index2}
         integer
       />
-      <NumberInput
+      <LabeledNumberInput
         label={<Latex className="block" text="a_j = " />}
         id="value2"
-        onChange={(e) => {
-          setInputVars({ ...inputVars, value2: e.target.value });
+        onChange={(newValue) => {
+          setInputVars({ ...inputVars, value2: newValue });
           setShowResult(false);
         }}
         value={inputVars.value2}
@@ -396,7 +394,7 @@ function TwoForm() {
   );
 }
 
-function NumberInput({
+function LabeledNumberInput({
   value,
   onChange,
   id,
@@ -405,7 +403,7 @@ function NumberInput({
 }: {
   id: string;
   value: string;
-  onChange: ChangeEventHandler<HTMLInputElement>;
+  onChange: (newValue: string) => void;
   integer?: boolean;
   label: ReactNode;
 }) {
@@ -414,14 +412,12 @@ function NumberInput({
       <label htmlFor={id} className="mr-2">
         {label}
       </label>
-      <input
-        type="number"
+      <NumberInput
         id={id}
         onChange={onChange}
         value={value}
-        step={integer ? 1 : "any"}
-        className="min-w-0 flex-grow rounded-lg border-2 border-solid border-gray-400"
-        required
+        integer={integer}
+        className="min-w-0 flex-grow"
       />
     </div>
   );
@@ -454,22 +450,5 @@ function RadioButton({
         {label}
       </label>
     </div>
-  );
-}
-
-function SubmitButton({
-  children,
-  onClick,
-}: {
-  children: ReactNode;
-  onClick?: MouseEventHandler<HTMLButtonElement>;
-}) {
-  return (
-    <button
-      onClick={onClick}
-      className="rounded-lg bg-gray-200 p-2 font-bold transition-colors hover:bg-gray-300"
-    >
-      {children}
-    </button>
   );
 }

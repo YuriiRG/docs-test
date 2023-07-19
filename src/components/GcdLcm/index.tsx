@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { calculateGcdLcm } from "./math";
+import { NumberInput, SubmitButton } from "../shared";
 
 export default function GcdLcm() {
   const [num1, setNum1] = useState("0");
@@ -10,29 +11,25 @@ export default function GcdLcm() {
     <div>
       <h2>Онлайн калькулятор. Обчислити НСД і НСК двох чисел</h2>
       <div>
-        <input
-          type="number"
-          className="rounded border-2 border-gray-300"
+        <NumberInput
           value={num1}
-          onChange={(e) => {
+          onChange={(newValue) => {
             setShowResult(false);
-            setNum1(e.target.value);
+            setNum1(newValue);
           }}
         />{" "}
         і{" "}
-        <input
-          type="number"
+        <NumberInput
           value={num2}
-          className="rounded border-2 border-gray-300"
-          onChange={(e) => {
+          onChange={(newValue) => {
             setShowResult(false);
-            setNum2(e.target.value);
+            setNum2(newValue);
           }}
         />
       </div>
-      <button onClick={() => setShowResult(true)} className="mt-2 rounded p-2">
+      <SubmitButton onClick={() => setShowResult(true)} className="my-2">
         Порахувати
-      </button>
+      </SubmitButton>
       {showResult &&
         (result ? (
           <>
