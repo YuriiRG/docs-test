@@ -1,34 +1,46 @@
 import React, { useState } from "react";
+import { NumberInput, Select, SubmitButton } from "../shared";
 import Latex from "../Latex";
-import { NumberInput, SubmitButton } from "../shared";
 
-export default function FindByPercent() {
+export default function AddSubPercent() {
   const [percent, setPercent] = useState("");
+  const [sign, setSign] = useState("+");
   const [num, setNum] = useState("");
   const [showResult, setShowResult] = useState(false);
-  const result = calculateValueByPercent(percent, num);
+  const result = calculateResult(percent, num, sign);
   return (
     <div>
       <h2 className="text-2xl">
-        Онлайн калькулятор. Знайти число X знаючи його Y відсотків
+        Онлайн калькулятор. Додати або відняти X відсотків від числа
       </h2>
       <div>
-        Знайти число <Latex text="x" /> якщо{" "}
+        Знайти число <Latex text="x" /> на{" "}
         <NumberInput
           className="w-24"
           value={percent}
           onChange={(newValue) => {
-            setPercent(newValue);
             setShowResult(false);
+            setPercent(newValue);
           }}
         />
-        % від цього числа дорівнюють{" "}
+        %{" "}
+        <Select
+          value={sign}
+          onChange={(newValue) => {
+            setSign(newValue);
+          }}
+          options={[
+            { value: "+", text: "більше" },
+            { value: "-", text: "меньше" },
+          ]}
+        />{" "}
+        від числа{" "}
         <NumberInput
           className="w-24"
           value={num}
           onChange={(newValue) => {
-            setNum(newValue);
             setShowResult(false);
+            setNum(newValue);
           }}
         />
       </div>
@@ -41,7 +53,7 @@ export default function FindByPercent() {
             <Latex text={`x = ${result}`} />
           </div>
         ) : (
-          <div>Невірні дані</div>
+          <div>Невірні вхідні дані</div>
         ))}
       {!showResult && (
         <div>
@@ -52,14 +64,19 @@ export default function FindByPercent() {
   );
 }
 
-function calculateValueByPercent(
+function calculateResult(
   percentStr: string,
   numStr: string,
+  sign: string,
 ): number | undefined {
   const percent = parseFloat(percentStr);
   const num = parseFloat(numStr);
-  if (isNaN(percent) || isNaN(num) || num === 0) {
+  if (isNaN(num) || isNaN(percent) || !["+", "-"].includes(sign)) {
     return undefined;
   }
-  return (100 * num) / percent;
+  if (sign === "+") {
+    return num + num * (percent / 100);
+  } else {
+    return num - num * (percent / 100);
+  }
 }

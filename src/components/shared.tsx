@@ -5,7 +5,7 @@ import { z } from "zod";
 
 const floatRegex = /^-?[0-9]+([.,][0-9]+)?$/;
 const floatTransform = (str: string) => {
-  return Number(str.replace(",", "."));
+  return parseFloat(str.replace(",", "."));
 };
 export const floatSchema = z
   .string()

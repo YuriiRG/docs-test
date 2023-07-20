@@ -1,11 +1,5 @@
 import { z } from "zod";
-
-const floatRegex = /^-?[0-9]+([.,][0-9]+)?$/;
-const floatTransform = (str: string) => {
-  return Number(str.replace(",", "."));
-};
-
-const floatSchema = z.string().regex(floatRegex).transform(floatTransform);
+import { floatSchema } from "../shared";
 
 export function calculateDeposit(inputData: {
   initial: string;

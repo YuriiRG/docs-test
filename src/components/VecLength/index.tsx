@@ -40,9 +40,9 @@ export default function App() {
         id="dimensions"
         value={vectorStr.length.toString()}
         onChange={(newValue) => {
-          setVectorStr(Array(Number(newValue)).fill("0"));
-          setStartPointStr(Array(Number(newValue)).fill("0"));
-          setEndPointStr(Array(Number(newValue)).fill("0"));
+          setVectorStr(Array(parseInt(newValue)).fill("0"));
+          setStartPointStr(Array(parseInt(newValue)).fill("0"));
+          setEndPointStr(Array(parseInt(newValue)).fill("0"));
           setShowResult(false);
         }}
         options={[
