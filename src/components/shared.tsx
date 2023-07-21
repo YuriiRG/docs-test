@@ -1,4 +1,12 @@
-import React, { Fragment, MouseEventHandler, ReactNode } from "react";
+import React, {
+  FormEventHandler,
+  ForwardedRef,
+  Fragment,
+  KeyboardEventHandler,
+  MouseEventHandler,
+  ReactNode,
+  forwardRef,
+} from "react";
 import { twMerge } from "tailwind-merge";
 import Latex from "./Latex";
 import { z } from "zod";
@@ -52,34 +60,42 @@ export function ComplexInput({
   );
 }
 
-export function NumberInput({
-  integer = false,
-  className = "",
-  id,
-  value,
-  onChange,
-  positive = false,
-}: {
-  value: string;
-  onChange: (newValue: string) => void;
-  id?: string;
-  integer?: boolean;
-  className?: string;
-  positive?: boolean;
-}) {
+export const NumberInput = forwardRef(function NumberInput(
+  {
+    integer = false,
+    className = "",
+    id,
+    value,
+    onChange,
+    positive = false,
+    onInput,
+  }: {
+    children?: ReactNode;
+    value?: string;
+    onChange?: (newValue: string) => void;
+    id?: string;
+    integer?: boolean;
+    className?: string;
+    positive?: boolean;
+    onInput?: FormEventHandler<HTMLInputElement>;
+  },
+  ref: ForwardedRef<HTMLInputElement>,
+) {
   return (
     <input
+      onInput={onInput}
+      ref={ref}
       id={id}
       value={value}
-      onChange={(e) => onChange(e.target.value)}
+      onChange={(e) => (onChange ? onChange(e.target.value) : undefined)}
       type="number"
       step={integer ? 1 : "any"}
-      className={twMerge("rounded border-2 border-gray-300", className)}
+      className={twMerge("w-52 rounded border-2 border-gray-300", className)}
       required
       min={positive ? 0 : undefined}
     />
   );
-}
+});
 
 export function Select({
   id,
