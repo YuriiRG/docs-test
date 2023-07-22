@@ -111,7 +111,7 @@ export default function VolumeConverter() {
 
   return (
     <div className="flex flex-col gap-4">
-      <h2 className="text-2xl">Онлайн калькулятор. Конвертер одиниць площі.</h2>
+      <h2 className="text-2xl">Онлайн калькулятор. Конвертер одиниць об'єму</h2>
       <Block name="Метричні">
         <InputGroup>
           <span className="w-60">Кубічний кілометр</span>
