@@ -1,5 +1,6 @@
 import React, { ReactNode, RefObject, useRef, useState } from "react";
 import { NumberInput } from "../shared";
+import { Block, InputGroup } from "./shared";
 
 export default function MassConverter() {
   const kiloton = useRef<HTMLInputElement>(null);
@@ -127,269 +128,244 @@ export default function MassConverter() {
         Онлайн калькулятор. Конвертер одиниць ваги і маси.
       </h2>
       <Block name="Метрична система">
-        <div className="flex flex-col gap-2">
-          <div className="flex items-baseline gap-2">
-            <span className="w-60">Кілотонна</span>
-            <NumberInput
-              ref={kiloton}
-              onInput={changeHandler(kiloton, (n) => n * 1e15)}
-            />
-          </div>
-          <div className="flex items-baseline gap-2">
-            <span className="w-60">Тонна</span>
-            <NumberInput
-              ref={ton}
-              onInput={changeHandler(ton, (n) => n * 1e12)}
-            />
-          </div>
-          <div className="flex items-baseline gap-2">
-            <span className="w-60">Кілоньютон (на поверхні землі)</span>
-            <NumberInput
-              ref={kilonewton}
-              onInput={changeHandler(kilonewton, (n) => (n / 9.80665) * 1e12)}
-            />
-          </div>
-          <div className="flex items-baseline gap-2">
-            <span className="w-60">Центнер</span>
-            <NumberInput
-              ref={centner}
-              onInput={changeHandler(centner, (n) => n * 1e11)}
-            />
-          </div>
-          <div className="flex items-baseline gap-2">
-            <span className="w-60">Кілограм</span>
-            <NumberInput
-              ref={kilogram}
-              onInput={changeHandler(kilogram, (n) => n * 1e9)}
-            />
-          </div>
-          <div className="flex items-baseline gap-2">
-            <span className="w-60">Ньютон (на поверхні землі)</span>
-            <NumberInput
-              ref={newton}
-              onInput={changeHandler(newton, (n) => (n / 9.80665) * 1e9)}
-            />
-          </div>
-          <div className="flex items-baseline gap-2">
-            <span className="w-60">Грам</span>
-            <NumberInput
-              ref={gram}
-              onInput={changeHandler(gram, (n) => n * 1e6)}
-            />
-          </div>
-          <div className="flex items-baseline gap-2">
-            <span className="w-60">Карат</span>
-            <NumberInput
-              ref={carat}
-              onInput={changeHandler(carat, (n) => (n / 5) * 1e6)}
-            />
-          </div>
-          <div className="flex items-baseline gap-2">
-            <span className="w-60">Центиграм</span>
-            <NumberInput
-              ref={centigram}
-              onInput={changeHandler(centigram, (n) => n * 1e5)}
-            />
-          </div>
-          <div className="flex items-baseline gap-2">
-            <span className="w-60">Міліграм</span>
-            <NumberInput
-              ref={milligram}
-              onInput={changeHandler(milligram, (n) => n * 1e3)}
-            />
-          </div>
-          <div className="flex items-baseline gap-2">
-            <span className="w-60">Мікрограм</span>
-            <NumberInput
-              ref={microgram}
-              onInput={changeHandler(microgram, (n) => n)}
-            />
-          </div>
-          <div className="flex items-baseline gap-2">
-            <span className="w-60">Атомна одиниця маси</span>
-            <NumberInput
-              ref={amu}
-              onInput={changeHandler(amu, (n) => (n * 1.660539066605) / 1e18)}
-            />
-          </div>
-        </div>
+        <InputGroup>
+          <span className="w-60">Кілотонна</span>
+          <NumberInput
+            ref={kiloton}
+            onInput={changeHandler(kiloton, (n) => n * 1e15)}
+          />
+        </InputGroup>
+        <InputGroup>
+          <span className="w-60">Тонна</span>
+          <NumberInput
+            ref={ton}
+            onInput={changeHandler(ton, (n) => n * 1e12)}
+          />
+        </InputGroup>
+        <InputGroup>
+          <span className="w-60">Кілоньютон (на поверхні землі)</span>
+          <NumberInput
+            ref={kilonewton}
+            onInput={changeHandler(kilonewton, (n) => (n / 9.80665) * 1e12)}
+          />
+        </InputGroup>
+        <InputGroup>
+          <span className="w-60">Центнер</span>
+          <NumberInput
+            ref={centner}
+            onInput={changeHandler(centner, (n) => n * 1e11)}
+          />
+        </InputGroup>
+        <InputGroup>
+          <span className="w-60">Кілограм</span>
+          <NumberInput
+            ref={kilogram}
+            onInput={changeHandler(kilogram, (n) => n * 1e9)}
+          />
+        </InputGroup>
+        <InputGroup>
+          <span className="w-60">Ньютон (на поверхні землі)</span>
+          <NumberInput
+            ref={newton}
+            onInput={changeHandler(newton, (n) => (n / 9.80665) * 1e9)}
+          />
+        </InputGroup>
+        <InputGroup>
+          <span className="w-60">Грам</span>
+          <NumberInput
+            ref={gram}
+            onInput={changeHandler(gram, (n) => n * 1e6)}
+          />
+        </InputGroup>
+        <InputGroup>
+          <span className="w-60">Карат</span>
+          <NumberInput
+            ref={carat}
+            onInput={changeHandler(carat, (n) => (n / 5) * 1e6)}
+          />
+        </InputGroup>
+        <InputGroup>
+          <span className="w-60">Центиграм</span>
+          <NumberInput
+            ref={centigram}
+            onInput={changeHandler(centigram, (n) => n * 1e5)}
+          />
+        </InputGroup>
+        <InputGroup>
+          <span className="w-60">Міліграм</span>
+          <NumberInput
+            ref={milligram}
+            onInput={changeHandler(milligram, (n) => n * 1e3)}
+          />
+        </InputGroup>
+        <InputGroup>
+          <span className="w-60">Мікрограм</span>
+          <NumberInput
+            ref={microgram}
+            onInput={changeHandler(microgram, (n) => n)}
+          />
+        </InputGroup>
+        <InputGroup>
+          <span className="w-60">Атомна одиниця маси</span>
+          <NumberInput
+            ref={amu}
+            onInput={changeHandler(amu, (n) => (n * 1.660539066605) / 1e18)}
+          />
+        </InputGroup>
       </Block>
       <Block name="Англійські / Американські">
-        <div className="flex flex-col gap-2">
-          <div className="flex items-baseline gap-2">
-            <span className="w-60">Довга тонна (брит.)</span>
-            <NumberInput
-              ref={longTon}
-              onInput={changeHandler(longTon, (n) => n * 1016046908800)}
-            />
-          </div>
-        </div>
-        <div className="flex items-baseline gap-2">
+        <InputGroup>
+          <span className="w-60">Довга тонна (брит.)</span>
+          <NumberInput
+            ref={longTon}
+            onInput={changeHandler(longTon, (n) => n * 1016046908800)}
+          />
+        </InputGroup>
+        <InputGroup>
           <span className="w-60">Коротка тонна (США)</span>
           <NumberInput
             ref={shortTon}
             onInput={changeHandler(shortTon, (n) => n * 907184740000)}
           />
-        </div>
-        <div className="flex items-baseline gap-2">
+        </InputGroup>
+        <InputGroup>
           <span className="w-60">Кілофунт, кіп</span>
           <NumberInput
             ref={kip}
             onInput={changeHandler(kip, (n) => n * 453592370000)}
           />
-        </div>
-        <div className="flex items-baseline gap-2">
+        </InputGroup>
+        <InputGroup>
           <span className="w-60">Довгий центнер (брит.)</span>
           <NumberInput
             ref={longHundredweight}
             onInput={changeHandler(longHundredweight, (n) => n * 50802345440)}
           />
-        </div>
-        <div className="flex items-baseline gap-2">
+        </InputGroup>
+        <InputGroup>
           <span className="w-60">Короткий центнер (США)</span>
           <NumberInput
             ref={shortHundredweight}
             onInput={changeHandler(shortHundredweight, (n) => n * 45359237000)}
           />
-        </div>
-        <div className="flex items-baseline gap-2">
+        </InputGroup>
+        <InputGroup>
           <span className="w-60">Стоун</span>
           <NumberInput
             ref={stone}
             onInput={changeHandler(stone, (n) => n * 6350293180)}
           />
-        </div>
-        <div className="flex items-baseline gap-2">
+        </InputGroup>
+        <InputGroup>
           <span className="w-60">Фунт</span>
           <NumberInput
             ref={pound}
             onInput={changeHandler(pound, (n) => n * 453592370)}
           />
-        </div>
-        <div className="flex items-baseline gap-2">
+        </InputGroup>
+        <InputGroup>
           <span className="w-60">Унція</span>
           <NumberInput
             ref={ounce}
             onInput={changeHandler(ounce, (n) => n * 28349523.125)}
           />
-        </div>
-        <div className="flex items-baseline gap-2">
+        </InputGroup>
+        <InputGroup>
           <span className="w-60">Драхма</span>
           <NumberInput
             ref={dram}
             onInput={changeHandler(dram, (n) => n * 1771845.1953125)}
           />
-        </div>
-        <div className="flex items-baseline gap-2">
+        </InputGroup>
+        <InputGroup>
           <span className="w-60">Гран</span>
           <NumberInput
             ref={grain}
             onInput={changeHandler(grain, (n) => n * 64798.91)}
           />
-        </div>
+        </InputGroup>
       </Block>
       <Block name="Британська аптечна">
-        <div className="flex flex-col gap-2">
-          <div className="flex items-baseline gap-2">
-            <span className="w-60">Фунт</span>
-            <NumberInput
-              ref={apPound}
-              onInput={changeHandler(apPound, (n) => n * 373241721.6)}
-            />
-          </div>
-          <div className="flex items-baseline gap-2">
-            <span className="w-60">Унція</span>
-            <NumberInput
-              ref={apOunce}
-              onInput={changeHandler(apOunce, (n) => n * 31103476.8)}
-            />
-          </div>
-          <div className="flex items-baseline gap-2">
-            <span className="w-60">Драхма</span>
-            <NumberInput
-              ref={apDram}
-              onInput={changeHandler(apDram, (n) => n * 3887934.6)}
-            />
-          </div>
-          <div className="flex items-baseline gap-2">
-            <span className="w-60">Скрупул</span>
-            <NumberInput
-              ref={apScruple}
-              onInput={changeHandler(apScruple, (n) => n * 1295978.2)}
-            />
-          </div>
-          <div className="flex items-baseline gap-2">
-            <span className="w-60">Гран</span>
-            <NumberInput
-              ref={apGrain}
-              onInput={changeHandler(apGrain, (n) => n * 64798.91)}
-            />
-          </div>
-        </div>
+        <InputGroup>
+          <span className="w-60">Фунт</span>
+          <NumberInput
+            ref={apPound}
+            onInput={changeHandler(apPound, (n) => n * 373241721.6)}
+          />
+        </InputGroup>
+        <InputGroup>
+          <span className="w-60">Унція</span>
+          <NumberInput
+            ref={apOunce}
+            onInput={changeHandler(apOunce, (n) => n * 31103476.8)}
+          />
+        </InputGroup>
+        <InputGroup>
+          <span className="w-60">Драхма</span>
+          <NumberInput
+            ref={apDram}
+            onInput={changeHandler(apDram, (n) => n * 3887934.6)}
+          />
+        </InputGroup>
+        <InputGroup>
+          <span className="w-60">Скрупул</span>
+          <NumberInput
+            ref={apScruple}
+            onInput={changeHandler(apScruple, (n) => n * 1295978.2)}
+          />
+        </InputGroup>
+        <InputGroup>
+          <span className="w-60">Гран</span>
+          <NumberInput
+            ref={apGrain}
+            onInput={changeHandler(apGrain, (n) => n * 64798.91)}
+          />
+        </InputGroup>
       </Block>
       <Block name="Староруські міри ваги">
-        <div className="flex flex-col gap-2">
-          <div className="flex items-baseline gap-2">
-            <span className="w-60">Берковець</span>
-            <NumberInput
-              ref={rusBerkovec}
-              onInput={changeHandler(rusBerkovec, (n) => n * 163804964000)}
-            />
-          </div>
-          <div className="flex items-baseline gap-2">
-            <span className="w-60">Пуд</span>
-            <NumberInput
-              ref={rusPood}
-              onInput={changeHandler(rusPood, (n) => n * 16380496400)}
-            />
-          </div>
-          <div className="flex items-baseline gap-2">
-            <span className="w-60">Фунт</span>
-            <NumberInput
-              ref={rusPound}
-              onInput={changeHandler(rusPound, (n) => n * 409512410)}
-            />
-          </div>
-          <div className="flex items-baseline gap-2">
-            <span className="w-60">Лот</span>
-            <NumberInput
-              ref={rusLot}
-              onInput={changeHandler(rusLot, (n) => n * 12797262.8125)}
-            />
-          </div>
-          <div className="flex items-baseline gap-2">
-            <span className="w-60">Золотнік</span>
-            <NumberInput
-              ref={rusZolotnik}
-              onInput={changeHandler(rusZolotnik, (n) => n * 4265754.270833333)}
-            />
-          </div>
-          <div className="flex items-baseline gap-2">
-            <span className="w-60">Доля</span>
-            <NumberInput
-              ref={rusDolya}
-              onInput={changeHandler(rusDolya, (n) => n * 44434.940321180555)}
-            />
-          </div>
-        </div>
+        <InputGroup>
+          <span className="w-60">Берковець</span>
+          <NumberInput
+            ref={rusBerkovec}
+            onInput={changeHandler(rusBerkovec, (n) => n * 163804964000)}
+          />
+        </InputGroup>
+        <InputGroup>
+          <span className="w-60">Пуд</span>
+          <NumberInput
+            ref={rusPood}
+            onInput={changeHandler(rusPood, (n) => n * 16380496400)}
+          />
+        </InputGroup>
+        <InputGroup>
+          <span className="w-60">Фунт</span>
+          <NumberInput
+            ref={rusPound}
+            onInput={changeHandler(rusPound, (n) => n * 409512410)}
+          />
+        </InputGroup>
+        <InputGroup>
+          <span className="w-60">Лот</span>
+          <NumberInput
+            ref={rusLot}
+            onInput={changeHandler(rusLot, (n) => n * 12797262.8125)}
+          />
+        </InputGroup>
+        <InputGroup>
+          <span className="w-60">Золотнік</span>
+          <NumberInput
+            ref={rusZolotnik}
+            onInput={changeHandler(rusZolotnik, (n) => n * 4265754.270833333)}
+          />
+        </InputGroup>
+        <InputGroup>
+          <span className="w-60">Доля</span>
+          <NumberInput
+            ref={rusDolya}
+            onInput={changeHandler(rusDolya, (n) => n * 44434.940321180555)}
+          />
+        </InputGroup>
       </Block>
-    </div>
-  );
-}
-
-function Block({ name, children }: { name: string; children: ReactNode }) {
-  const [open, setOpen] = useState(true);
-  return (
-    <div className="rounded-lg border-4 border-solid border-gray-300 p-4">
-      <div className="flex items-baseline gap-2">
-        <span className="font-bold">{name}</span>
-        <button className="rounded px-2" onClick={() => setOpen(!open)}>
-          {open ? "Скрити" : "Розкрити"}
-        </button>
-      </div>
-      <div style={{ display: open ? "block" : "none" }} className="my-2">
-        {children}
-      </div>
     </div>
   );
 }
