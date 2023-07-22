@@ -46,6 +46,9 @@ export default function VelocityConverter() {
 
   return (
     <div className="flex flex-col gap-4">
+      <h2 className="text-2xl">
+        Онлайн калькулятор. Конвертер одиниць температури
+      </h2>
       <Block name="Температурні шкали">
         <InputGroup>
           <span className="w-60">Градус Цельсія</span>
