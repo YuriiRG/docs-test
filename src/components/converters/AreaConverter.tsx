@@ -2,7 +2,7 @@ import React, { RefObject, useRef } from "react";
 import { Block, InputGroup } from "./shared";
 import { NumberInput } from "../shared";
 
-export default function LengthConverter() {
+export default function AreaConverter() {
   const km2 = useRef<HTMLInputElement>(null);
   const hectare = useRef<HTMLInputElement>(null);
   const decare = useRef<HTMLInputElement>(null);
