@@ -2,11 +2,10 @@ import React, {
   DetailedHTMLProps,
   HTMLAttributes,
   useRef,
-  useState,
+  useEffect,
 } from "react";
 import { MathfieldElement, MathfieldOptions } from "mathlive";
-import "mathlive";
-import ConvertAsciiMathToLatex from "asciimath-to-latex";
+
 // some black ts magic to type mathfield web component.
 // it basically combines mathlive specific attributes
 // with default html attributes and replaces className with class
@@ -34,6 +33,11 @@ export default function MathInput({
   onInput?: (newValue: string) => void;
 }) {
   const ref = useRef<MathfieldElement>(null);
+  useEffect(() => {
+    (async () => {
+      import("mathlive");
+    })();
+  }, []);
   return (
     <math-field
       ref={ref}
