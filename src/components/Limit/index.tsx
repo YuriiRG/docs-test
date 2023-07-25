@@ -4,6 +4,8 @@ import { NumberInput, Select, SubmitButton } from "../shared";
 import nerdamer from "nerdamer";
 import Latex from "../Latex";
 
+require("nerdamer/all");
+
 export default function Limit() {
   const [math, setMath] = useState("");
   const [limitMode, setLimitMode] = useState("plusInf");
@@ -69,10 +71,10 @@ export default function Limit() {
             }
             const expr = nerdamer.convertFromLaTeX(fixLatex(math));
             try {
-              const derivative = nerdamer(
+              const limitResult = nerdamer(
                 `limit(${expr.toString()}, x, ${limit})`,
               );
-              const tex = derivative.toTeX();
+              const tex = limitResult.toTeX();
               setResult({ success: true, data: tex });
             } catch (e) {
               setResult({
