@@ -38,13 +38,10 @@ export function calculateDeposit(inputData: {
     interest = (1 + interest / 100) ** (1 / 12) * 100 - 100;
   }
 
-  console.log(interest, initial);
-
   let sum = initial;
 
   for (let i = 0; i < length; i++) {
     sum *= 1 + interest / 100;
-    console.log(sum);
     sum += monthly;
   }
 

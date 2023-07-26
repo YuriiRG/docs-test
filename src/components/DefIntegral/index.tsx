@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import Latex from "../Latex";
 import LatexInput, { fixLatex } from "../LatexInput";
-import { convertFromLaTeX, integrate } from "nerdamer";
-import { SubmitButton } from "../shared";
+import nerdamer, { convertFromLaTeX, integrate } from "nerdamer";
+import { NumberInput, SubmitButton } from "../shared";
 
 require("nerdamer/all");
 
-export default function Integral() {
+export default function DefIntegral() {
   const [math, setMath] = useState("");
+  const [from, setFrom] = useState("0");
+  const [to, setTo] = useState("0");
   const [result, setResult] = useState<
     | {
         success: true;
@@ -21,8 +23,28 @@ export default function Integral() {
   return (
     <div>
       <h2 className="text-2xl">
-        Онлайн калькулятор. Розв'язання інтегралів онлайн
+        Онлайн калькулятор. Розв'язання визначених інтегралів онлайн
       </h2>
+      <div>
+        Знайти визначений інтеграл від{" "}
+        <NumberInput
+          value={from}
+          onChange={(newValue) => {
+            setResult(undefined);
+            setFrom(newValue);
+          }}
+          className="w-20"
+        />{" "}
+        до{" "}
+        <NumberInput
+          value={to}
+          onChange={(newValue) => {
+            setResult(undefined);
+            setTo(newValue);
+          }}
+          className="w-20"
+        />
+      </div>
       <div className="mt-2 flex items-center">
         <Latex className="text-2xl" text="\int" />
         <LatexInput
@@ -39,13 +61,17 @@ export default function Integral() {
         className="my-2"
         onClick={() => {
           try {
-            if (math.includes("null") || math.includes("undefined")) {
-              throw "invalid latex";
-            }
             const expr = convertFromLaTeX(fixLatex(math));
             try {
-              const integral = integrate(expr, "x");
-              const tex = integral.toTeX();
+              const defIntegral = nerdamer(
+                `defint(${expr.toString()}, ${from}, ${to}, x)`,
+              );
+              const tex = defIntegral.toTeX();
+              if (tex.includes("\\int")) {
+                // it means that nerdamer cannot calculate this def integral
+
+                throw "can't calculate";
+              }
               setResult({ success: true, data: tex });
             } catch (e) {
               setResult({
@@ -64,7 +90,9 @@ export default function Integral() {
         (result.success ? (
           <div>
             <Latex
-              text={`\\int\\left(${math}\\right) dx=${result.data} + C`}
+              text={`\\int_{${nerdamer(from).toTeX()}}^{${nerdamer(
+                to,
+              ).toTeX()}}\\left(${math}\\right) dx=${result.data}`}
               blockMode
             />
           </div>
