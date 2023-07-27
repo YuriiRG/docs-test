@@ -70,7 +70,7 @@ export default function Variance() {
       {showResult &&
         (result !== undefined ? (
           <div>
-            <Latex text={`M[X]=${result}`} />
+            <Latex text={`D[X]=${result}`} />
           </div>
         ) : (
           <div>
