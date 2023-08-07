@@ -56,7 +56,7 @@ export default function PointsToVector() {
           }}
         />
       </div>
-      <SubmitButton onClick={() => setShowResult(true)}>
+      <SubmitButton className="my-2" onClick={() => setShowResult(true)}>
         Порахувати
       </SubmitButton>
       {showResult &&

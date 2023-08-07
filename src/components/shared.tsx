@@ -11,21 +11,9 @@ import { twMerge } from "tailwind-merge";
 import Latex from "./Latex";
 import { z } from "zod";
 
-const floatRegex = /^-?[0-9]+([.,][0-9]+)?$/;
-const floatTransform = (str: string) => {
-  return parseFloat(str.replace(",", "."));
-};
-export const floatSchema = z
-  .string()
-  .regex(floatRegex)
-  .transform(floatTransform);
-
-const integerRegex = /^-?[0-9]+$/;
-const integerTransform = Number;
-export const integerSchema = z
-  .string()
-  .regex(integerRegex)
-  .transform(integerTransform);
+// .min(1) is a workaround for "" being parsed like 0
+export const floatSchema = z.string().min(1).pipe(z.coerce.number().safe());
+export const integerSchema = z.string().min(1).pipe(z.coerce.number().int());
 
 export function ComplexInput({
   id,
