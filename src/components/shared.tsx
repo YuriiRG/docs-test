@@ -15,6 +15,13 @@ import { z } from "zod";
 export const floatSchema = z.string().min(1).pipe(z.coerce.number().safe());
 export const integerSchema = z.string().min(1).pipe(z.coerce.number().int());
 
+export function convertPointsToVector(
+  startPoint: number[],
+  endPoint: number[],
+) {
+  return startPoint.map((n, i) => endPoint[i] - n);
+}
+
 export function ComplexInput({
   id,
   value,

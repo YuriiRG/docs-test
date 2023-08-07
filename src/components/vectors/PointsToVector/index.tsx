@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { Select, SubmitButton, VectorInput, floatSchema } from "../../shared";
+import {
+  Select,
+  SubmitButton,
+  VectorInput,
+  convertPointsToVector,
+  floatSchema,
+} from "../../shared";
 import { z } from "zod";
 import Latex from "../../Latex";
 
@@ -86,5 +92,5 @@ function calculateResult(startPointStr: string[], endPointStr: string[]) {
   }
   const { startPoint, endPoint } = parseResult.data;
 
-  return startPoint.map((n, i) => endPoint[i] - n);
+  return convertPointsToVector(startPoint, endPoint);
 }
