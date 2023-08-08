@@ -103,13 +103,13 @@ export function Select({
   id?: string;
   options: { value: string; text: ReactNode }[];
   value?: string;
-  onChange: (newValue: string) => void;
+  onChange?: (newValue: string) => void;
 }) {
   return (
     <select
       id={id}
       value={value}
-      onChange={(e) => onChange(e.target.value)}
+      onChange={(e) => onChange?.(e.target.value)}
       className={twMerge("rounded bg-gray-200 p-1 align-baseline", className)}
     >
       {options.map(({ value, text }) => (
