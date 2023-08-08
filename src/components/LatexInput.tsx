@@ -5,6 +5,7 @@ import React, {
   useEffect,
 } from "react";
 import { MathfieldElement, MathfieldOptions } from "mathlive";
+import { twMerge } from "tailwind-merge";
 
 // some black ts magic to type mathfield web component.
 // it basically combines mathlive specific attributes
@@ -35,7 +36,7 @@ export default function LatexInput({
   const ref = useRef<MathfieldElement>(null);
   useEffect(() => {
     (async () => {
-      import("mathlive");
+      await import("mathlive");
     })();
   }, []);
   return (
@@ -46,7 +47,7 @@ export default function LatexInput({
           onInput?.(ref.current.getValue("latex"));
         }
       }}
-      class={className}
+      class={twMerge("rounded border-2 border-gray-400", className)}
     >
       {defaultValue}
     </math-field>
