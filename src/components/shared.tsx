@@ -13,7 +13,7 @@ import { z } from "zod";
 
 // .min(1) is a workaround for "" being parsed like 0
 export const floatSchema = z.string().min(1).pipe(z.coerce.number().safe());
-export const integerSchema = z.string().min(1).pipe(z.coerce.number().int());
+export const intSchema = z.string().min(1).pipe(z.coerce.number().safe().int());
 
 export function convertPointsToVector(
   startPoint: number[],

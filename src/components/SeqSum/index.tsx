@@ -8,12 +8,7 @@ import {
 import { z } from "zod";
 import Latex from "../Latex";
 import { sumFirstLast, sumFirstStep, sumOneStep, sumTwo } from "./math";
-import {
-  NumberInput,
-  SubmitButton,
-  floatSchema,
-  integerSchema,
-} from "../shared";
+import { NumberInput, SubmitButton, floatSchema, intSchema } from "../shared";
 
 export default function SeqSum() {
   const [mode, setMode] = useState("firstLast");
@@ -97,7 +92,7 @@ export default function SeqSum() {
 }
 
 const firstLastSchema = z.object({
-  n: integerSchema,
+  n: intSchema,
   first: floatSchema,
   last: floatSchema,
 });
@@ -161,7 +156,7 @@ function FirstLastForm() {
 }
 
 const firstStepSchema = z.object({
-  n: integerSchema,
+  n: intSchema,
   first: floatSchema,
   step: floatSchema,
 });
@@ -225,8 +220,8 @@ function FirstStepForm() {
 }
 
 const oneStepSchema = z.object({
-  n: integerSchema,
-  index: integerSchema,
+  n: intSchema,
+  index: intSchema,
   value: floatSchema,
   step: floatSchema,
 });
@@ -305,10 +300,10 @@ function OneStepForm() {
 }
 
 const twoSchema = z.object({
-  n: integerSchema,
-  index: integerSchema,
+  n: intSchema,
+  index: intSchema,
   value: floatSchema,
-  index2: integerSchema,
+  index2: intSchema,
   value2: floatSchema,
 });
 
