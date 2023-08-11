@@ -214,7 +214,7 @@ function calculateResult(input: z.input<typeof vectorSchema>) {
   const vector1 = convertPointsToVector(startPoint1, endPoint1);
   const vector2 = convertPointsToVector(startPoint2, endPoint2);
 
-  if (vector1.some((n) => n === 0) || vector2.some((n) => n === 0)) {
+  if (vector1.every((n) => n === 0) || vector2.every((n) => n === 0)) {
     return undefined;
   }
 
