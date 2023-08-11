@@ -51,6 +51,8 @@ export default function ScaleVector() {
           onChange={(newValue) => {
             setShowResult(false);
             setMode(newValue);
+            setStartPoint(Array(startPoint.length).fill("0"));
+            setEndPoint(Array(endPoint.length).fill("0"));
           }}
           options={[
             { text: "Координатами", value: "coords" },

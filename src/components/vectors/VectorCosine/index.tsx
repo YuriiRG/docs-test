@@ -56,6 +56,8 @@ export default function App() {
           onChange={(newValue) => {
             setShowResult(false);
             setMode(newValue);
+            setStartPoint(Array(startPoint.length).fill("0"));
+            setEndPoint(Array(endPoint.length).fill("0"));
           }}
           options={[
             { value: "coords", text: "Координатами" },

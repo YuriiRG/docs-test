@@ -57,6 +57,8 @@ export default function AddSubVectors() {
           onChange={(newValue) => {
             setShowResult(false);
             setFirstMode(newValue);
+            setStartPoint1(Array(startPoint1.length).fill("0"));
+            setEndPoint1(Array(endPoint1.length).fill("0"));
           }}
           options={[
             { text: "Координатами", value: "coords" },
@@ -71,6 +73,8 @@ export default function AddSubVectors() {
           onChange={(newValue) => {
             setShowResult(false);
             setSecondMode(newValue);
+            setStartPoint2(Array(startPoint2.length).fill("0"));
+            setEndPoint2(Array(endPoint2.length).fill("0"));
           }}
           options={[
             { text: "Координатами", value: "coords" },
