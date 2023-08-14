@@ -159,7 +159,7 @@ export default function CrossProduct() {
             <Latex
               text={`${
                 firstMode === "coords" ? "\\vec{a}" : "\\overrightarrow{AB}"
-              } \\cdot ${
+              } \\times ${
                 secondMode === "coords" ? "\\vec{b}" : "\\overrightarrow{CD}"
               } = \\{${result.join("; ")}\\}`}
             />
@@ -172,10 +172,10 @@ export default function CrossProduct() {
 }
 
 const vectorSchema = z.object({
-  startPoint1: z.array(floatSchema),
-  endPoint1: z.array(floatSchema),
-  startPoint2: z.array(floatSchema),
-  endPoint2: z.array(floatSchema),
+  startPoint1: z.array(floatSchema).length(3),
+  endPoint1: z.array(floatSchema).length(3),
+  startPoint2: z.array(floatSchema).length(3),
+  endPoint2: z.array(floatSchema).length(3),
 });
 
 function calculateResult(input: z.input<typeof vectorSchema>) {
@@ -188,10 +188,6 @@ function calculateResult(input: z.input<typeof vectorSchema>) {
 
   const vector1 = convertPointsToVector(startPoint1, endPoint1);
   const vector2 = convertPointsToVector(startPoint2, endPoint2);
-
-  if (vector1.length !== 3 || vector2.length !== 3) {
-    return undefined;
-  }
 
   return [
     vector1[1] * vector2[2] - vector1[2] * vector2[1],
