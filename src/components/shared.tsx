@@ -137,7 +137,9 @@ export function VectorInput({
   separator?: ReactNode;
 }) {
   return (
-    <fieldset className={className}>
+    <fieldset
+      className={twMerge("flex min-w-0 flex-wrap items-baseline", className)}
+    >
       {startLabel}
       {value.map((num, i) => (
         <Fragment key={i}>

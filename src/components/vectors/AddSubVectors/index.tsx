@@ -82,7 +82,7 @@ export default function AddSubVectors() {
           ]}
         />
       </div>
-      <div className="my-3 w-max border-2 border-x-0 border-y-gray-400 py-1">
+      <div className="my-3 max-w-max border-2 border-x-0 border-y-gray-400 py-1">
         Перший вектор:
         {firstMode === "coords" ? (
           <VectorInput
@@ -126,7 +126,7 @@ export default function AddSubVectors() {
           </div>
         )}
       </div>
-      <div className="my-3 w-max border-2 border-x-0 border-y-gray-400 py-1">
+      <div className="my-3 max-w-max border-2 border-x-0 border-y-gray-400 py-1">
         Другий вектор:
         {secondMode === "coords" ? (
           <VectorInput
