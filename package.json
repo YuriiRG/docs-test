@@ -63,6 +63,9 @@
       "allowedVersions": {
         "react": "^17"
       }
+    },
+    "overrides": {
+      "svgo": "^3.0.2"
     }
   }
 }
